@@ -1586,7 +1586,7 @@ let calFilterSky  = null;
 let calFilterDidi = null;
 let calSelectedDs = null;
 
-function initCal() { const n=new Date(); calYear=n.getFullYear(); calMonth=n.getMonth(); }
+function initCal() { const n=new Date(); const start=new Date(2026,5,1); calYear=(n>=start?n:start).getFullYear(); calMonth=(n>=start?n:start).getMonth(); }
 function calPrev() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} calSelectedDs=null; renderCalendar(); }
 function calNext() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} calSelectedDs=null; renderCalendar(); }
 
