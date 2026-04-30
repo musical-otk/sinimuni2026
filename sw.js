@@ -1,5 +1,5 @@
-const CACHE_NAME = 'roger2026-v48';
-const BASE = '/roger2026';
+const CACHE_NAME = 'eoduk2026-v1';
+const BASE = '/eoduk2026';
 
 // 앱 시작 시 캐시할 파일들
 const PRECACHE_URLS = [

@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-<title>✈ ROGER 관극 다이어리</title>
+<title>🌕 어둑시니 관극 다이어리</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#3B6FE8">
+<meta name="theme-color" content="#c86040">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="ROGER">
+<meta name="apple-mobile-web-app-title" content="어둑시니">
 <style>
   :root {
     --bg: #f8f8f6; --bg1: #ffffff; --bg2: #ffffff; --bg3: #f0f0ee;
     --border: #e0e0dc; --text: #1a1a1a; --text1: #1a1a1a; --text2: #555550; --text3: #999990;
-    --accent: #2a5caa; --accent2: #1a3c7a; --accent-light: #e8eef8;
+    --accent: #c86040; --accent2: #a04828; --accent-light: #fdf0ec;
     --danger: #cc4444; --success: #2a8a4a; --star: #f0a020;
     --seat1: #dce8f8; --seat2: #a8c4ee; --seat3: #6a9ad8; --seat4: #3a6ab8; --seat5: #1a3a88;
     --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 12px; --tab-h: 64px;
@@ -21,12 +21,12 @@
   [data-theme="dark"] {
     --bg: #111118; --bg1: #1a1a24; --bg2: #1a1a24; --bg3: #22222e;
     --border: #333340; --text: #f0f0f0; --text1: #f0f0f0; --text2: #aaaaaa; --text3: #666670;
-    --accent: #5a8cdd; --accent2: #7aacff; --accent-light: #1a2a44;
+    --accent: #e07855; --accent2: #f09070; --accent-light: #3a1a10;
     --danger: #ee6666; --success: #44aa66;
     --shadow: 0 2px 12px rgba(0,0,0,0.4);
-    --seat1: #1a3570; --seat2: #1e52a0; --seat3: #2e70cc; --seat4: #4490e0; --seat5: #6ab0ff;
+    --seat1: #5a1a22; --seat2: #8a1e2a; --seat3: #b82840; --seat4: #d94058; --seat5: #f05070;
   }
-  [data-theme="dark"] .next-show-card { background: linear-gradient(135deg, #1a3a70 0%, #26508a 100%); }
+  [data-theme="dark"] .next-show-card { background: linear-gradient(135deg, #6a1525 0%, #a02535 100%); color: #fff; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Apple SD Gothic Neo', sans-serif;
@@ -162,10 +162,10 @@
   .cal-session-row { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-top: 1px solid var(--border); }
   .cal-session-time { font-size: 12px; font-weight: 700; color: var(--text2); min-width: 36px; }
   .cal-session-casting { flex: 1; font-size: 13px; }
-  .cal-session-casting .sky { color: #1a3a88; font-weight: 600; }
-  .cal-session-casting .didi { color: #881a3a; font-weight: 600; }
-  [data-theme="dark"] .cal-session-casting .sky { color: #7aacff; }
-  [data-theme="dark"] .cal-session-casting .didi { color: #ff7aac; }
+  .cal-session-casting .sky { color: #3d4e75; font-weight: 600; }
+  .cal-session-casting .didi { color: #4a6e40; font-weight: 600; }
+  [data-theme="dark"] .cal-session-casting .sky { color: #8099cc; }
+  [data-theme="dark"] .cal-session-casting .didi { color: #7aaa60; }
   .cal-session-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
   .cal-session-badge.done   { background: var(--accent-light); color: var(--accent); }
   .cal-session-badge.booked { background: #e6f9ee; color: var(--success); }
@@ -217,10 +217,10 @@
   .schedule-row.today-row { background: var(--accent-light); }
   .time-badge { font-size: 11px; background: var(--bg3); padding: 2px 6px; border-radius: 4px; color: var(--text2); }
   .actor-pill { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
-  .actor-pill.sky { background: #e0eeff; color: #2255aa; }
-  .actor-pill.didi { background: #ffe0f0; color: #aa2255; }
-  [data-theme="dark"] .actor-pill.sky { background: #1a2a44; color: #7aacff; }
-  [data-theme="dark"] .actor-pill.didi { background: #3a1a2a; color: #ff7aac; }
+  .actor-pill.sky { background: #e8ecf5; color: #3d4e75; }
+  .actor-pill.didi { background: #e5f0e0; color: #4a6e40; }
+  [data-theme="dark"] .actor-pill.sky { background: #1e2a42; color: #8099cc; }
+  [data-theme="dark"] .actor-pill.didi { background: #1a2e18; color: #7aaa60; }
 
   /* STAMP / COUPON */
   .stamp-cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -298,14 +298,14 @@
   .detail-field-value { font-size: 15px; font-weight: 500; }
   .casting-display { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
   .casting-tag { padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; }
-  .casting-tag.sky { background: #e0eeff; color: #1a3a88; }
-  .casting-tag.didi { background: #ffe0f0; color: #881a3a; }
-  [data-theme="dark"] .casting-tag.sky { background: #1a2a44; color: #7aacff; }
-  [data-theme="dark"] .casting-tag.didi { background: #3a1a2a; color: #ff7aac; }
+  .casting-tag.sky { background: #e8ecf5; color: #3d4e75; }
+  .casting-tag.didi { background: #e5f0e0; color: #4a6e40; }
+  [data-theme="dark"] .casting-tag.sky { background: #1e2a42; color: #8099cc; }
+  [data-theme="dark"] .casting-tag.didi { background: #1a2e18; color: #7aaa60; }
 
   /* HOME */
   .next-show-card { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); border-radius: var(--radius); padding: 18px; margin-bottom: 8px; color: #fff; position: relative; overflow: hidden; cursor: pointer; }
-  .next-show-card::before { content: '✈'; position: absolute; right: 16px; top: 12px; font-size: 40px; opacity: 0.15; }
+  .next-show-card::before { content: '🌕'; position: absolute; right: 16px; top: 12px; font-size: 40px; opacity: 0.15; }
   .next-show-dday { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
   .next-show-dday.today-dday { color: #ffe066; }
   .next-show-date { font-size: 13px; opacity: 0.85; margin-bottom: 10px; }
@@ -379,7 +379,7 @@
 <!-- ========== HOME ========== -->
 <div class="page active" id="page-home">
   <div class="page-header">
-    <div class="page-title">✈ ROGER</div>
+    <div class="page-title">🌕 어둑시니</div>
     <button class="btn btn-primary btn-sm" onclick="openAddRecord()">+ 기록</button>
   </div>
   <div id="home-next-show"></div>
@@ -393,7 +393,7 @@
   </div>
   <div class="card">
     <div class="card-title" onclick="toggleHomeStamps()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;">
-      <span>📡 교신일지 현황</span>
+      <span>🎟 재관람 카드 현황</span>
       <span id="home-stamps-toggle-icon" style="font-size:11px;color:var(--text3);">▲</span>
     </div>
     <div id="home-stamps-wrap">
@@ -416,21 +416,21 @@
   <!-- 배우 필터 -->
   <div class="cal-filter">
     <div class="cal-filter-row">
-      <span class="cal-filter-label">스카일러</span>
+      <span class="cal-filter-label">어둑시니</span>
       <div id="cal-chips-sky" style="display:flex;gap:6px;flex-wrap:wrap;">
         <button class="cal-chip active" onclick="setCalFilterSky(null,this)">전체</button>
-        <button class="cal-chip" onclick="setCalFilterSky('주민진',this)">주민진</button>
-        <button class="cal-chip" onclick="setCalFilterSky('고상호',this)">고상호</button>
-        <button class="cal-chip" onclick="setCalFilterSky('기세중',this)">기세중</button>
+        <button class="cal-chip" onclick="setCalFilterSky('강찬',this)">강찬</button>
+        <button class="cal-chip" onclick="setCalFilterSky('조모세',this)">조모세</button>
+        <button class="cal-chip" onclick="setCalFilterSky('박두호',this)">박두호</button>
       </div>
     </div>
     <div class="cal-filter-row">
-      <span class="cal-filter-label">디디</span>
+      <span class="cal-filter-label">소문</span>
       <div id="cal-chips-didi" style="display:flex;gap:6px;flex-wrap:wrap;">
         <button class="cal-chip active" onclick="setCalFilterDidi(null,this)">전체</button>
-        <button class="cal-chip" onclick="setCalFilterDidi('정휘',this)">정휘</button>
         <button class="cal-chip" onclick="setCalFilterDidi('이한솔',this)">이한솔</button>
-        <button class="cal-chip" onclick="setCalFilterDidi('박주혁',this)">박주혁</button>
+        <button class="cal-chip" onclick="setCalFilterDidi('신주협',this)">신주협</button>
+        <button class="cal-chip" onclick="setCalFilterDidi('류동휘',this)">류동휘</button>
       </div>
     </div>
     <div id="cal-filter-hint" style="font-size:11px;color:var(--text3);padding:2px 0 4px;">배우를 선택하면 해당 회차가 표시됩니다</div>
@@ -449,8 +449,8 @@
 <!-- ========== COUPON / STAMP ========== -->
 <div class="page" id="page-coupon">
   <div class="page-header">
-    <div class="page-title">쿠폰·도장</div>
-    <button class="btn btn-outline btn-sm" onclick="openAddStampBoard()">+ 도장판</button>
+    <div class="page-title">쿠폰·재관람</div>
+    <button class="btn btn-outline btn-sm" onclick="openAddStampBoard()">+ 카드</button>
   </div>
 
   <!-- 쿠폰 현황 -->
@@ -460,10 +460,6 @@
       <button class="btn btn-primary btn-sm" onclick="openAddCouponManual()">+ 할인권 추가/차감</button>
     </div>
     <div id="coupon-list"></div>
-    <div style="margin-top:10px;">
-      <button class="btn btn-outline btn-sm" style="width:100%;" onclick="openAddCouponPack()">🎁 쿠폰팩 추가 (3종 +1)</button>
-    </div>
-    <div style="margin-top:8px;font-size:11px;color:var(--text3);text-align:center;">쿠폰팩 사용 기간: 2026.03.17 ~ 2026.04.19</div>
   </div>
 
   <!-- 전체 이력 표 -->
@@ -477,8 +473,8 @@
     </div>
   </div>
 
-  <!-- 교신일지 카드 -->
-  <div class="section-title" style="margin-bottom:8px;">교신일지 카드</div>
+  <!-- 재관람 카드 -->
+  <div class="section-title" style="margin-bottom:8px;">재관람 카드</div>
   <div id="stamp-boards-list" style="margin-bottom:16px;"></div>
 </div>
 
@@ -593,7 +589,6 @@
         <select class="form-control" id="rec-time" onchange="onTimeChange()">
           <option value="">선택</option>
           <option value="14:00">14:00</option>
-          <option value="16:00">16:00</option>
           <option value="18:00">18:00</option>
           <option value="20:00">20:00</option>
         </select>
@@ -602,21 +597,21 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">스카일러 *</label>
+        <label class="form-label">어둑시니 *</label>
         <select class="form-control" id="rec-skylar">
           <option value="">선택</option>
-          <option value="주민진">주민진</option>
-          <option value="고상호">고상호</option>
-          <option value="기세중">기세중</option>
+          <option value="강찬">강찬</option>
+          <option value="조모세">조모세</option>
+          <option value="박두호">박두호</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">디디 *</label>
+        <label class="form-label">소문 *</label>
         <select class="form-control" id="rec-didi">
           <option value="">선택</option>
-          <option value="정휘">정휘</option>
           <option value="이한솔">이한솔</option>
-          <option value="박주혁">박주혁</option>
+          <option value="신주협">신주협</option>
+          <option value="류동휘">류동휘</option>
         </select>
       </div>
     </div>
@@ -645,7 +640,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">번호</label>
-        <input type="number" class="form-control" id="rec-num" placeholder="번호" min="1">
+        <input type="number" class="form-control" id="rec-num" placeholder="번호" min="1" max="13">
       </div>
     </div>
 
@@ -653,23 +648,22 @@
       <label class="form-label">할인권종 <span style="color:var(--text3);font-weight:400;">(선택)</span></label>
       <select class="form-control" id="rec-discount-type" onchange="onDiscountTypeChange()">
         <option value="">없음 (일반)</option>
-        <option value="프리뷰">프리뷰 (40%)</option>
-        <option value="2차 조기예매">2차 조기예매 (25%)</option>
-        <option value="재관람">재관람 (30%)</option>
+        <option value="프리뷰 할인">프리뷰 할인</option>
+        <option value="조기예매 할인">조기예매 할인</option>
+        <option value="타임세일">타임세일</option>
+        <option value="뉴프로덕션 할인">뉴프로덕션 할인</option>
+        <option value="학생 할인">학생 할인</option>
+        <option value="장애인/국가유공자">장애인/국가유공자</option>
         <option value="40% 할인권">40% 할인권</option>
         <option value="50% 할인권">50% 할인권</option>
-        <option value="증빙 프리패스">증빙 프리패스</option>
-        <option value="타임세일">타임세일</option>
-        <option value="마티네">마티네 (30%)</option>
-        <option value="직장인">직장인 (10%)</option>
-        <option value="예술인패스">예술인패스 (20%)</option>
-        <option value="청소년">청소년 (20~30%)</option>
-        <option value="창작산실 할인">창작산실 (30%)</option>
-        <option value="문화누리카드">문화누리카드 (50%)</option>
-        <option value="장애인/국가유공자">장애인/국가유공자</option>
-        <option value="기타">기타</option>
       </select>
       <div id="rec-discount-warn" style="display:none;margin-top:6px;font-size:12px;color:var(--danger);">⚠ 현재 보유한 쿠폰이 없습니다</div>
+      <div id="rec-paid-diff-group" style="display:none;margin-top:8px;">
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;color:var(--text2);">
+          <input type="checkbox" id="rec-paid-diff" style="width:16px;height:16px;accent-color:var(--accent);">
+          차액 지불 (할인권 기록만, 쿠폰 차감 안 함)
+        </label>
+      </div>
     </div>
 
     <div class="form-group">
@@ -682,9 +676,9 @@
       <input type="text" class="form-control" id="rec-comment" placeholder="예매처, 도장교환 상대 등">
     </div>
 
-    <!-- 교신일지 카드 -->
+    <!-- 재관람 카드 -->
     <div class="form-group" id="rec-stamp-group">
-      <label class="form-label">교신일지 카드</label>
+      <label class="form-label">재관람 카드</label>
       <select class="form-control" id="rec-stamp-board" onchange="onRecStampBoardChange()">
         <option value="">연동 안 함</option>
       </select>
@@ -770,23 +764,26 @@
       <button class="btn-icon" onclick="closePanel('overlay-stamp')">✕</button>
     </div>
     <div style="background:var(--accent-light);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--accent);">
-      <div style="font-weight:700;margin-bottom:6px;">📋 교신일지 카드 혜택</div>
-      <div style="display:flex;gap:12px;margin-bottom:8px;">
+      <div style="font-weight:700;margin-bottom:6px;">🎟 재관람 카드 혜택</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
         <div style="flex:1;text-align:center;background:var(--bg1);border-radius:8px;padding:6px 4px;">
-          <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">3칸 달성</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">3회 달성</div>
+          <div style="font-weight:700;color:var(--text1);">40% 할인권</div>
+        </div>
+        <div style="flex:1;text-align:center;background:var(--bg1);border-radius:8px;padding:6px 4px;">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">4회 달성</div>
           <div style="font-weight:700;color:var(--text1);">50% 할인권</div>
         </div>
         <div style="flex:1;text-align:center;background:var(--bg1);border-radius:8px;padding:6px 4px;">
-          <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">7칸 달성</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">7회 달성</div>
           <div style="font-weight:700;color:var(--text1);">실황 OST</div>
         </div>
       </div>
       <div style="font-size:11px;color:var(--text2);line-height:1.7;">
-        <div>📍 NOL 서경스퀘어 3층 스콘 2관 로비 MD부스</div>
-        <div>🗓 운영 2026.3.5 ~ 5.31 · 할인권 사용 2026.3.7 ~ 5.31</div>
-        <div>⏰ 공연 시작 1시간 전 ~ 종료 후 10분</div>
-        <div style="margin-top:4px;color:var(--text3);">· 한 회차 유료티켓 1매만 적립 가능 (동일 회차 중복 불가)</div>
-        <div style="color:var(--text3);">· 티켓 여러 장 구매 시 다른 도장판에 분산 적립 가능</div>
+        <div>📍 NOL 서경스퀘어 스콘 2관</div>
+        <div>🗓 공연 기간 2026.06.09 ~ 08.30</div>
+        <div style="margin-top:4px;color:var(--text3);">· 뮤지컬 어둑시니 유료 티켓 구매자에게 제공</div>
+        <div style="color:var(--text3);">· 관람 횟수에 따라 다양한 혜택 제공</div>
       </div>
     </div>
     <div class="form-group">
@@ -809,8 +806,7 @@
     <div class="form-group">
       <label class="form-label">도장 추가 방식</label>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="직접 관람" checked onchange="updateStampSessionOptions()"> 직접 관람</label>
-        <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="적립권 사용" onchange="updateStampSessionOptions()"> 적립권 사용</label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="관람" checked onchange="updateStampSessionOptions()"> 관람</label>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="교환" onchange="updateStampSessionOptions()"> 교환</label>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="나눔" onchange="updateStampSessionOptions()"> 나눔</label>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="기타" onchange="updateStampSessionOptions()"> 기타</label>
@@ -859,7 +855,6 @@
       <select class="form-control" id="manual-coupon-key">
         <option value="discount40">40% 할인권</option>
         <option value="discount50">50% 할인권</option>
-        <option value="discountPass">할인 증빙 PASS</option>
       </select>
     </div>
     <div class="form-group">
@@ -902,39 +897,14 @@
   </div>
 </div>
 
-<!-- ===== COUPON PACK PANEL ===== -->
-<div class="overlay" id="overlay-coupon-pack">
-  <div class="panel">
-    <div class="panel-handle"></div>
-    <div class="flex-between" style="margin-bottom:20px;">
-      <div class="panel-title">쿠폰팩 추가</div>
-      <button class="btn-icon" onclick="closePanel('overlay-coupon-pack')">✕</button>
-    </div>
-    <div style="background:var(--accent-light);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--accent);">
-      <div style="font-weight:700;margin-bottom:4px;">🎁 쿠폰팩 구성</div>
-      <div>40% 할인권 × 1</div>
-      <div>50% 할인권 × 1</div>
-      <div>할인 증빙 PASS × 1</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">획득 날짜</label>
-      <input type="date" class="form-control" id="coupon-pack-date">
-    </div>
-    <div class="form-group">
-      <label class="form-label">코멘트 (선택)</label>
-      <input type="text" class="form-control" id="coupon-pack-comment" placeholder="예: 도장 교환">
-    </div>
-    <button class="btn btn-primary" style="width:100%;margin-top:8px;" onclick="saveCouponPack()">추가</button>
-  </div>
-</div>
 
 <script>
 // ============================================================
 // DATA LAYER
 // ============================================================
 const DB = {
-  get(key, def) { try { return JSON.parse(localStorage.getItem('roger_'+key)) ?? def; } catch { return def; } },
-  set(key, val) { localStorage.setItem('roger_'+key, JSON.stringify(val)); }
+  get(key, def) { try { return JSON.parse(localStorage.getItem('eoduk_'+key)) ?? def; } catch { return def; } },
+  set(key, val) { localStorage.setItem('eoduk_'+key, JSON.stringify(val)); }
 };
 function localDate() { const d = new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function getRecords()      { return DB.get('records', []); }
@@ -942,17 +912,20 @@ function saveRecords(r)    { DB.set('records', r); }
 function getSchedule()     { return DB.get('schedule', []); }
 function saveSchedule(s)   { DB.set('schedule', s); }
 function getEvents() {
-  return DB.get('events', [
-    { name:'스페셜커튼콜', startDate:'2026-03-31', endDate:'2026-04-05', color:'#8B5CF6' },
-    { name:'트리플적립',   startDate:'2026-04-07', endDate:'2026-04-12', color:'#F59E0B' }
-  ]);
+  return DB.get('events', []);
 }
 function saveEvents(ev)    { DB.set('events', ev); }
 function migrateStampBoards(boards) {
   return boards.map(b => {
     if (!b.milestones) {
-      // notified=true if already past the milestone (avoid re-alerting on old data)
-      b.milestones = [{ at: 3, reward: '50% 할인권', couponKey: 'discount50', notified: b.currentCount >= 3 }];
+      b.milestones = [
+        { at: 3, reward: '40% 할인권', couponKey: 'discount40', notified: b.currentCount >= 3 },
+        { at: 4, reward: '50% 할인권', couponKey: 'discount50', notified: b.currentCount >= 4 },
+        { at: 7, reward: '실황 OST',  couponKey: null,          notified: b.currentCount >= 7 }
+      ];
+    } else {
+      const at3 = b.milestones.find(m => m.at === 3);
+      if (at3 && at3.qty === undefined) at3.qty = undefined;
     }
     if (!b.totalSlots) b.totalSlots = 7;
     if (!b.reward)     b.reward     = '실황 OST';
@@ -964,9 +937,8 @@ function getStampBoards()  { return migrateStampBoards(DB.get('stamp_boards', []
 function saveStampBoards(s){ DB.set('stamp_boards', s); }
 function getCoupons() {
   return DB.get('coupons', {
-    discount40:   { count: 0, history: [] },
-    discount50:   { count: 0, history: [] },
-    discountPass: { count: 0, history: [] }
+    discount40: { count: 0, history: [] },
+    discount50: { count: 0, history: [] }
   });
 }
 function saveCoupons(c) { DB.set('coupons', c); }
@@ -1064,7 +1036,7 @@ function onTimeChange() {
   if (m) { document.getElementById('rec-skylar').value=m.skylar||''; document.getElementById('rec-didi').value=m.didi||''; }
 }
 function resetTimeOptions() {
-  document.getElementById('rec-time').innerHTML = `<option value="">선택</option><option value="14:00">14:00</option><option value="16:00">16:00</option><option value="18:00">18:00</option><option value="20:00">20:00</option>`;
+  document.getElementById('rec-time').innerHTML = `<option value="">선택</option><option value="14:00">14:00</option><option value="18:00">18:00</option><option value="20:00">20:00</option>`;
 }
 function onUnconfirmedChange() {
   // purely visual feedback if needed – isBooked is read from checkbox at save time
@@ -1093,7 +1065,7 @@ function populateStampSelect(keepBoardId) {
     items.forEach(b => {
       const o = document.createElement('option');
       o.value = b.id;
-      o.textContent = `[📡 ${b.name}] (${b.currentCount}/${b.totalSlots})${suffix}`;
+      o.textContent = `[🎟 ${b.name}] (${b.currentCount}/${b.totalSlots})${suffix}`;
       // 현재 기록에 연동된 도장판은 완료/일시정지 상태라도 선택 가능하게 유지
       if (disabled && b.id !== keepBoardId) {
         o.disabled = true;
@@ -1130,9 +1102,11 @@ function openAddRecord(date) {
   document.getElementById('rec-price').value = '';
   document.getElementById('rec-discount-type').value = '';
   document.getElementById('rec-discount-warn').style.display = 'none';
+  document.getElementById('rec-paid-diff-group').style.display = 'none';
+  document.getElementById('rec-paid-diff').checked = false;
   document.getElementById('rec-comment').value = '';
   document.getElementById('rec-memo').value = '';
-  document.getElementById('rec-unconfirmed').checked = false; // default: confirmed (isBooked=true)
+  document.getElementById('rec-unconfirmed').checked = false;
   populateStampSelect();
   document.getElementById('rec-stamp-board').value = '';
   resetStars();
@@ -1158,6 +1132,9 @@ function editRecord(id) {
   document.getElementById('rec-price').value = r.price||'';
   document.getElementById('rec-discount-type').value = r.discountType||'';
   document.getElementById('rec-discount-warn').style.display = 'none';
+  const hasCouponEdit = DISCOUNT_COUPON_MAP[r.discountType||''] || null;
+  document.getElementById('rec-paid-diff-group').style.display = hasCouponEdit ? '' : 'none';
+  document.getElementById('rec-paid-diff').checked = r.paidDiff || false;
   document.getElementById('rec-comment').value = r.comment||'';
   document.getElementById('rec-memo').value = r.memo||'';
   // isBooked: true by default; unconfirmed = !isBooked
@@ -1193,25 +1170,24 @@ function saveRecord() {
   const stampQty      = recQtyEl ? parseInt(recQtyEl.value) || 1 : 1;
   const discountType  = document.getElementById('rec-discount-type').value || null;
   const newCouponKey  = DISCOUNT_COUPON_MAP[discountType] || null;
+  const paidDiff      = newCouponKey ? document.getElementById('rec-paid-diff').checked : false;
 
-  // 쿠폰 잔여 체크 (신규 또는 할인권종 변경 시)
+  // 쿠폰 잔여 체크 (신규 또는 할인권종 변경 시, 차액지불이 아닌 경우)
   const prevRecord   = editId ? records.find(x => x.id === editId) : null;
   const prevDiscount = prevRecord?.discountType || null;
   const prevCouponKey = DISCOUNT_COUPON_MAP[prevDiscount] || null;
   const couponChanged = discountType !== prevDiscount;
 
-  if (newCouponKey && couponChanged) {
+  if (newCouponKey && couponChanged && !paidDiff) {
     const boards = getStampBoards();
     const coupons = getCoupons();
     const available = calcCouponCount(newCouponKey, coupons, boards, records);
-    // 같은 쿠폰 유지 수정 시엔 체크 생략 (!(editId && same key))
     if (available <= 0 && !(editId && prevCouponKey === newCouponKey)) {
       showToast('현재 보유한 쿠폰이 없습니다');
       return;
     }
   }
 
-  // 쿠폰 count는 records 기반 실시간 계산 — history에 기록하지 않음
   const record = {
     id: editId||uuid(), date, time, skylar, didi, isBooked,
     seatZone:     document.getElementById('rec-zone').value||null,
@@ -1219,6 +1195,7 @@ function saveRecord() {
     seatNumber:   numVal!=='' ? parseInt(numVal) : null,
     price:        priceVal!=='' ? parseInt(priceVal) : null,
     discountType: discountType,
+    paidDiff:     paidDiff || false,
     stampBoardId: stampBoardId || null,
     stampQty:     stampBoardId ? stampQty : null,
     rating:       currentStar,
@@ -1274,8 +1251,11 @@ function saveRecord() {
             });
             recalcStampCount(newBoard);
 
-            // 마일스톤 달성 시 notified 설정 (쿠폰 count는 calcCouponCount()가 m.notified로 동적 계산)
-            if (!newBoard.milestones) newBoard.milestones = [{ at:3, reward:'50% 할인권', couponKey:'discount50', notified:false }];
+            if (!newBoard.milestones) newBoard.milestones = [
+              { at:3, reward:'40% 할인권', couponKey:'discount40', notified:false },
+              { at:4, reward:'50% 할인권', couponKey:'discount50', notified:false },
+              { at:7, reward:'실황 OST',  couponKey:null,          notified:false }
+            ];
             newBoard.milestones.forEach(m => {
               if (newBoard.currentCount >= m.at && !m.notified) {
                 m.notified = true;
@@ -1320,24 +1300,22 @@ function openDetail(id) {
   const d = new Date(r.date+'T00:00:00');
   const bookedBadge = r.isBooked===false ? '<span style="font-size:11px;color:var(--text3);margin-left:6px;">미정</span>' : '<span style="font-size:11px;color:var(--success);margin-left:6px;">✅ 예매확정</span>';
   document.getElementById('detail-title').innerHTML = `${r.date} (${dow[d.getDay()]}) ${r.time}${bookedBadge}`;
-  let html = `<div class="casting-display"><div class="casting-tag sky">스카일러 ${r.skylar}</div><div class="casting-tag didi">디디 ${r.didi}</div></div>`;
+  let html = `<div class="casting-display"><div class="casting-tag sky">어둑시니 ${r.skylar}</div><div class="casting-tag didi">소문 ${r.didi}</div></div>`;
   if (r.rating) html += `<div class="detail-field"><div class="detail-field-label">별점</div><div style="color:var(--star);font-size:20px;">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div>`;
   if (r.comment) html += `<div class="detail-field"><div class="detail-field-label">한줄 코멘트</div><div class="detail-field-value">${r.comment}</div></div>`;
   if (r.seatZone) {
     html += `<div class="detail-field"><div class="detail-field-label">좌석</div><div class="detail-field-value">${r.seatZone}구역 ${r.seatRow}열 ${r.seatNumber}번</div></div>`;
     html += buildMiniSeat(r.seatZone, r.seatRow, r.seatNumber);
   }
-  if (r.price != null && r.price !== '') html += `<div class="detail-field"><div class="detail-field-label">티켓 가격</div><div class="detail-field-value">₩${r.price.toLocaleString()}${r.discountType ? ` <span style="font-size:11px;color:var(--accent);background:var(--accent-light);padding:2px 6px;border-radius:4px;margin-left:4px;">${r.discountType}</span>` : ''}</div></div>`;
+  if (r.price != null && r.price !== '') html += `<div class="detail-field"><div class="detail-field-label">티켓 가격</div><div class="detail-field-value">₩${r.price.toLocaleString()}${r.discountType ? ` <span style="font-size:11px;color:var(--accent);background:var(--accent-light);padding:2px 6px;border-radius:4px;margin-left:4px;">${DISCOUNT_LABEL[r.discountType] || r.discountType}</span>${r.paidDiff ? ' <span style="font-size:10px;color:var(--text3);">차액지불</span>' : ''}` : ''}</div></div>`;
   if (r.stampBoardId) {
     const boards = getStampBoards();
     const board  = boards.find(b => b.id === r.stampBoardId);
     if (board) {
       recalcStampCount(board);
-      // 날짜 오름차순 누적합으로 이 회차의 순번 계산
       const sorted = [...(board.history||[])].sort((a,z) => a.date.localeCompare(z.date));
       let cumulative = 0, seq = null;
       for (const h of sorted) {
-        // qty 필드 기준으로만 계산 (recalcStampCount와 동일한 로직)
         const hQty = h.qty ?? 1;
         const isThisRecord = h.recordId ? h.recordId === r.id : h.date === r.date;
         if (isThisRecord && seq === null) seq = cumulative + 1;
@@ -1346,7 +1324,7 @@ function openDetail(id) {
       if (seq === null) seq = board.currentCount;
       const qty = r.stampQty || 1;
       const seqLabel = qty > 1 ? `[${seq}~${seq+qty-1}번째 도장] ×${qty}` : `${seq}번째 도장`;
-      html += `<div class="detail-field"><div class="detail-field-label">교신일지 카드</div><div class="detail-field-value">[📡 ${board.name}] ${seqLabel}</div></div>`;
+      html += `<div class="detail-field"><div class="detail-field-label">재관람 카드</div><div class="detail-field-value">[🎟 ${board.name}] ${seqLabel}</div></div>`;
     }
   }
   if (r.memo) html += `<div class="detail-field"><div class="detail-field-label">감상 메모</div><div class="detail-field-value" style="font-size:14px;line-height:1.6;white-space:pre-wrap;">${r.memo}</div></div>`;
@@ -1479,15 +1457,15 @@ function renderHome() {
         <div class="next-show-dday${diff===0?' today-dday':''}">${dday}${nextShow.isBooked===false ? ' <span style="font-size:14px;opacity:0.7;font-weight:400;">미정</span>' : ''}</div>
         <div class="next-show-date">${nextShow.date} (${dow[d.getDay()]}) ${nextShow.time}</div>
         <div class="next-show-casting">
-          <span class="next-show-pill sky">스카일러 ${nextShow.skylar}</span>
-          <span class="next-show-pill didi">디디 ${nextShow.didi}</span>
+          <span class="next-show-pill sky">어둑시니 ${nextShow.skylar}</span>
+          <span class="next-show-pill didi">소문 ${nextShow.didi}</span>
         </div>
         ${seat ? `<div class="next-show-seat">${seat}</div>` : ''}
       </div>`;
   } else {
     document.getElementById('home-next-show').innerHTML = `
       <div class="card" style="text-align:center;color:var(--text3);padding:20px;">
-        <div style="font-size:24px;margin-bottom:6px;">✈</div>
+        <div style="font-size:24px;margin-bottom:6px;">🌕</div>
         <div style="font-size:13px;">예매 확정된 일정이 없습니다</div>
       </div>`;
   }
@@ -1523,7 +1501,7 @@ function renderHome() {
         const actualPct    = Math.min(100, Math.round(cur   / b.totalSlots * 100));
         const done = cur >= b.totalSlots;
         return `<div class="home-stamp-row">
-          <div class="home-stamp-name">[📡 ${b.name}]${done?' 🎉':''}</div>
+          <div class="home-stamp-name">[🎟 ${b.name}]${done?' 🎉':''}</div>
           <div class="home-stamp-bar">
             <div class="home-stamp-bar-fill scheduled" style="width:${scheduledPct}%"></div>
             <div class="home-stamp-bar-fill actual"    style="width:${actualPct}%"></div>
@@ -1542,26 +1520,23 @@ function renderHome() {
     const future = boards.reduce((sum, b) => {
       const totalEntered = (b.history||[]).reduce((t, h) => t + (h.qty||1), 0);
       return sum + (b.milestones||[]).filter(m =>
-        (m.couponKey||'discount50') === key && !m.notified && totalEntered >= m.at
+        m.couponKey === key && !m.notified && totalEntered >= m.at
       ).length;
     }, 0);
     return cur + future;
   }
-  const c40    = calcCouponCount('discount40',   coupons, boards, records, todayStr);
-  const c50    = calcCouponCount('discount50',   coupons, boards, records, todayStr);
-  const cPas   = calcCouponCount('discountPass', coupons, boards, records, todayStr);
+  const c40    = calcCouponCount('discount40', coupons, boards, records, todayStr);
+  const c50    = calcCouponCount('discount50', coupons, boards, records, todayStr);
   const f40    = homeCouponFinal('discount40');
   const f50    = homeCouponFinal('discount50');
-  const fPas   = homeCouponFinal('discountPass');
   const homeCouponItems = [
-    { key:'discount40',   label:'40% 할인권',    cur:c40,  final:f40  },
-    { key:'discount50',   label:'50% 할인권',    cur:c50,  final:f50  },
-    { key:'discountPass', label:'할인 증빙 PASS', cur:cPas, final:fPas }
+    { key:'discount40', label:'40% 할인권', cur:c40, final:f40 },
+    { key:'discount50', label:'50% 할인권', cur:c50, final:f50 }
   ];
   document.getElementById('home-coupons').innerHTML =
     `<div class="coupon-cards">${homeCouponItems.map(item => {
       const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
-        + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>(m.couponKey||'discount50')===item.key&&m.notified).length,0);
+        + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).length,0);
       const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key).length
         + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
       return `<div class="coupon-card">
@@ -1864,18 +1839,18 @@ function renderStats() {
   const countAct = (f,n) => records.filter(r=>r[f]===n).length;
   const countSch = (f,n) => schedule.filter(s=>s[f]===n).length;
 
-  let ah = `<tr><th colspan="3" class="role-section-title">스카일러</th></tr><tr><th>배우</th><th>총 회차</th><th>관람</th></tr>`;
+  let ah = `<tr><th colspan="3" class="role-section-title">어둑시니</th></tr><tr><th>배우</th><th>총 회차</th><th>관람</th></tr>`;
   sky.forEach(a  => { ah += `<tr><td>${a}</td><td style="color:var(--text3)">${countSch('skylar',a)}</td><td>${countAct('skylar',a)}</td></tr>`; });
-  ah += `<tr><th colspan="3" class="role-section-title">디디</th></tr><tr><th>배우</th><th>총 회차</th><th>관람</th></tr>`;
+  ah += `<tr><th colspan="3" class="role-section-title">소문</th></tr><tr><th>배우</th><th>총 회차</th><th>관람</th></tr>`;
   didi.forEach(a => { ah += `<tr><td>${a}</td><td style="color:var(--text3)">${countSch('didi',a)}</td><td>${countAct('didi',a)}</td></tr>`; });
   document.getElementById('stats-actors').innerHTML = ah;
 
   const pairs = [
-    ['주민진','이한솔'],['고상호','이한솔'],['기세중','이한솔'],
-    ['주민진','정휘'],  ['고상호','정휘'],  ['기세중','정휘'],
-    ['주민진','박주혁'],['고상호','박주혁'],['기세중','박주혁']
+    ['강찬','이한솔'], ['강찬','신주협'], ['강찬','류동휘'],
+    ['조모세','이한솔'],['조모세','신주협'],['조모세','류동휘'],
+    ['박두호','이한솔'],['박두호','신주협'],['박두호','류동휘']
   ];
-  let ph = '<tr><th>스카일러</th><th>디디</th><th>총 회차</th><th>관람</th></tr>';
+  let ph = '<tr><th>어둑시니</th><th>소문</th><th>총 회차</th><th>관람</th></tr>';
   pairs.forEach(([s,d]) => {
     const tot = schedule.filter(x=>x.skylar===s&&x.didi===d).length;
     const seen = records.filter(r=>r.skylar===s&&r.didi===d).length;
@@ -2009,12 +1984,12 @@ async function fetchEvents(manual = false) {
 // ACTOR PHOTOS (설정)
 // ============================================================
 const ACTOR_ROLES = [
-  { name:'주민진', role:'스카일러' },
-  { name:'고상호', role:'스카일러' },
-  { name:'기세중', role:'스카일러' },
-  { name:'정휘',   role:'디디' },
-  { name:'이한솔', role:'디디' },
-  { name:'박주혁', role:'디디' },
+  { name:'강찬',  role:'어둑시니' },
+  { name:'조모세', role:'어둑시니' },
+  { name:'박두호', role:'어둑시니' },
+  { name:'이한솔', role:'소문' },
+  { name:'신주협', role:'소문' },
+  { name:'류동휘', role:'소문' },
 ];
 
 // ============================================================
@@ -2049,9 +2024,9 @@ function renderStampBoards() {
   if (allDone) {
     html += `<div style="text-align:center;padding:12px 0 8px;">
       <button class="btn btn-primary" onclick="openAddStampBoard()" style="width:100%;padding:14px;">
-        🆕 새 도장판 시작하기
+        🆕 새 재관람 카드 시작하기
       </button>
-      <p style="font-size:12px;color:var(--text3);margin-top:8px;">7칸 · 3칸:50%할인권 · 7칸:실황OST</p>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px;">7회 · 3회:40%할인권 · 4회:50%할인권 · 7회:실황OST</p>
     </div>`;
   }
 
@@ -2066,23 +2041,24 @@ function renderStampBoards() {
     const { cur, final } = calcStampCounts(b);
     const pct        = Math.min(100, Math.round(cur / total * 100));
     const finalPct   = Math.min(100, Math.round(final / total * 100));
-    const mid3done   = cur >= 3;
     const alldone    = cur >= total;
-    const markerPct  = (3 / total * 100).toFixed(2);
+    const marker3Pct = (3 / total * 100).toFixed(2);
+    const marker4Pct = (4 / total * 100).toFixed(2);
 
-    const milestones = b.milestones || [{ at:3 }, { at:7 }];
+    const milestones = b.milestones || [{ at:3 }, { at:4 }, { at:7 }];
     const nextMs     = [...milestones].sort((a,b2)=>a.at-b2.at).find(m => cur < m.at);
     const toNext     = nextMs ? nextMs.at - cur : null;
 
     let statusHtml = '';
     if (paused)               statusHtml = `<div class="stamp-status-row stamp-status-paused">일시정지 중</div>`;
-    else if (alldone)         statusHtml = `<div class="stamp-status-row stamp-status-done">★ OST 달성!</div>`;
-    else if (mid3done)        statusHtml = `<div class="stamp-status-row stamp-status-mid">🏷 할인권 달성!</div>`;
+    else if (alldone)         statusHtml = `<div class="stamp-status-row stamp-status-done">★ 실황 OST 달성!</div>`;
+    else if (cur >= 4)        statusHtml = `<div class="stamp-status-row stamp-status-mid">🏷 50% 할인권 달성!</div>`;
+    else if (cur >= 3)        statusHtml = `<div class="stamp-status-row stamp-status-mid">🏷 40% 할인권 달성!</div>`;
     else if (toNext !== null) statusHtml = `<div class="stamp-status-row stamp-status-next">다음까지 ${toNext}개</div>`;
 
     return `<div class="stamp-board${paused ? ' paused' : ''}">
       <div class="stamp-board-header">
-        <div class="stamp-board-name">[📡 ${b.name}]</div>
+        <div class="stamp-board-name">[🎟 ${b.name}]</div>
         <div class="stamp-board-menu">
           <button class="stamp-menu-btn" onclick="renameStampBoard('${b.id}')" title="이름 변경">📝</button>
           <button class="stamp-menu-btn" onclick="togglePauseStampBoard('${b.id}')" title="${paused ? '재개' : '일시정지'}">${paused ? '▶' : '⏸'}</button>
@@ -2097,7 +2073,8 @@ function renderStampBoards() {
         <div class="progress-bar" style="overflow:visible;">
           <div class="progress-fill" style="width:${finalPct}%;background:var(--border);border-radius:6px;"></div>
           <div class="progress-fill" style="width:${pct}%;background:${paused ? 'var(--text3)' : 'var(--accent)'};border-radius:6px;margin-top:-12px;position:relative;"></div>
-          <div class="progress-marker" style="left:calc(${markerPct}% - 1px);"></div>
+          <div class="progress-marker" style="left:calc(${marker3Pct}% - 1px);"></div>
+          <div class="progress-marker" style="left:calc(${marker4Pct}% - 1px);background:var(--accent);"></div>
         </div>
       </div>
       ${statusHtml}
@@ -2128,7 +2105,7 @@ function renderStampHistoryPanel() {
   const board  = boards.find(b => b.id === boardId);
   if (!board) return;
 
-  document.getElementById('stamp-history-panel-title').textContent = `[📡 ${board.name}] 이력`;
+  document.getElementById('stamp-history-panel-title').textContent = `[🎟 ${board.name}] 이력`;
   const sortedHistory = [...(board.history||[])].sort((a,z) => a.date.localeCompare(z.date));
   const el = document.getElementById('stamp-history-panel-content');
 
@@ -2235,7 +2212,11 @@ function saveStampBoard() {
     name,
     totalSlots: 7,
     reward: '실황 OST',
-    milestones: [{ at: 3, reward: '50% 할인권', couponKey: 'discount50', notified: false }],
+    milestones: [
+      { at: 3, reward: '40% 할인권', couponKey: 'discount40', notified: false },
+      { at: 4, reward: '50% 할인권', couponKey: 'discount50', notified: false },
+      { at: 7, reward: '실황 OST',  couponKey: null,          notified: false }
+    ],
     currentCount: 0,
     history: []
   });
@@ -2284,7 +2265,7 @@ function togglePauseStampBoard(id) {
 
 function openAddStamp(boardId) {
   document.getElementById('stamp-board-id').value = boardId;
-  document.querySelector('input[name="stamp-method"][value="직접 관람"]').checked = true;
+  document.querySelector('input[name="stamp-method"][value="관람"]').checked = true;
   const qtyEl = document.querySelector('input[name="stamp-qty"][value="1"]');
   if (qtyEl) qtyEl.checked = true;
   const dateEl = document.getElementById('stamp-date');
@@ -2363,7 +2344,11 @@ function applyStampToBoard(boardId, qty, date, historyComment, comment) {
   board.history.push({ date, method: historyComment + qtyLabel, comment: comment || '', qty: actualQty });
   recalcStampCount(board);
 
-  if (!board.milestones) board.milestones = [{ at:3, reward:'50% 할인권', couponKey:'discount50', notified:false }];
+  if (!board.milestones) board.milestones = [
+    { at:3, reward:'40% 할인권', couponKey:'discount40', notified:false },
+    { at:4, reward:'50% 할인권', couponKey:'discount50', notified:false },
+    { at:7, reward:'실황 OST',  couponKey:null,          notified:false }
+  ];
   let toastMsg = '도장 ' + actualQty + '개 완료 (' + board.currentCount + '/' + board.totalSlots + ')';
   board.milestones.forEach(m => {
     if (board.currentCount >= m.at && !m.notified) {
@@ -2411,14 +2396,26 @@ function addStamp() {
 
 // 할인권종 → 쿠폰 키 매핑
 const DISCOUNT_COUPON_MAP = {
-  '40% 할인권':  'discount40',
-  '50% 할인권':  'discount50',
-  '증빙 프리패스': 'discountPass'
+  '40% 할인권': 'discount40',
+  '50% 할인권': 'discount50'
+};
+
+// 할인권 표시명 (내부 키 → 한글 표시)
+const DISCOUNT_LABEL = {
+  '프리뷰 할인':    '프리뷰 할인',
+  '조기예매 할인':  '조기예매 할인',
+  '타임세일':       '타임세일',
+  '뉴프로덕션 할인':'뉴프로덕션 할인',
+  '학생 할인':      '학생 할인',
+  '장애인/국가유공자':'장애인/국가유공자',
+  '40% 할인권':    '40% 할인권',
+  '50% 할인권':    '50% 할인권'
 };
 
 function onDiscountTypeChange() {
   const val = document.getElementById('rec-discount-type').value;
   const warn = document.getElementById('rec-discount-warn');
+  const paidDiffGroup = document.getElementById('rec-paid-diff-group');
   const couponKey = DISCOUNT_COUPON_MAP[val];
   if (couponKey) {
     const coupons = getCoupons();
@@ -2426,8 +2423,11 @@ function onDiscountTypeChange() {
     const records = getRecords();
     const avail   = calcCouponCount(couponKey, coupons, boards, records);
     warn.style.display = avail <= 0 ? '' : 'none';
+    paidDiffGroup.style.display = '';
   } else {
     warn.style.display = 'none';
+    paidDiffGroup.style.display = 'none';
+    document.getElementById('rec-paid-diff').checked = false;
   }
 }
 
@@ -2460,34 +2460,12 @@ function openAddStampBoardFromRecord() {
   openPanel('overlay-stamp');
 }
 
-function openAddCouponPack() {
-  document.getElementById('coupon-pack-date').value = localDate();
-  document.getElementById('coupon-pack-comment').value = '';
-  openPanel('overlay-coupon-pack');
-}
-
-function saveCouponPack() {
-  const date    = document.getElementById('coupon-pack-date').value;
-  const comment = document.getElementById('coupon-pack-comment').value.trim();
-  if (!date) { showToast('날짜를 입력해주세요'); return; }
-  const coupons = getCoupons();
-  ['discount40','discount50','discountPass'].forEach(key => {
-    if (!coupons[key].history) coupons[key].history = [];
-    coupons[key].history.push({ type:'획득', date, comment: comment || '쿠폰팩 획득' });
-  });
-  saveCoupons(coupons);
-  closePanel('overlay-coupon-pack');
-  renderCouponList();
-  renderHome();
-  showToast('쿠폰팩 추가 완료 (3종 +1)');
-}
 
 let _couponHistoryKey = '';
 
 const COUPON_ITEMS = [
-  { key:'discount40',   label:'40% 할인권',    short:'40%' },
-  { key:'discount50',   label:'50% 할인권',    short:'50%' },
-  { key:'discountPass', label:'할인 증빙 PASS', short:'증빙' }
+  { key:'discount40', label:'40% 할인권', short:'40%' },
+  { key:'discount50', label:'50% 할인권', short:'50%' }
 ];
 
 // 도장 달성 보상을 도장판 상태에서 실시간 계산
@@ -2504,16 +2482,17 @@ function calcCouponCount(key, coupons, boards, records, asOf) {
   // ② 도장판 milestone 달성분 — asOf 기준으로 달성 날짜 체크
   const stampBonus = boards.reduce((sum, b) => {
     return sum + (b.milestones || []).filter(m => {
-      if ((m.couponKey || 'discount50') !== key || !m.notified) return false;
+      if (!m.couponKey || m.couponKey !== key || !m.notified) return false;
       if (!asOf) return true;
       const achievedDate = getStampAchievedDate(b, m.at);
       return achievedDate && achievedDate <= asOf;
     }).length;
   }, 0);
-  // ③ 관람 기록 할인권 사용분 — asOf 기준 날짜만 차감
+  // ③ 관람 기록 할인권 사용분 — asOf 기준 날짜만 차감, 차액지불은 스킵
   const used = records.filter(r =>
     (DISCOUNT_COUPON_MAP[r.discountType] || null) === key &&
-    (!asOf || r.date <= asOf)
+    (!asOf || r.date <= asOf) &&
+    !r.paidDiff
   ).length;
   return Math.max(0, manual + stampBonus - used);
 }
@@ -2560,7 +2539,7 @@ function renderCouponList() {
     const final = calcFinal(item.key);                                         // 전체 기준
     // 최종 기준 적립/사용 합산
     const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
-      + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>(m.couponKey||'discount50')===item.key&&m.notified).length,0);
+      + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).length,0);
     const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key).length
       + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
     return `<div class="coupon-card">
@@ -2614,10 +2593,10 @@ function renderCouponAllHistory() {
     });
   });
 
-  // ③ 관람 기록 할인권 사용분 — records에서 동적 생성 (삭제 불가)
+  // ③ 관람 기록 할인권 사용분 — records에서 동적 생성 (삭제 불가, 차액지불 제외)
   records.forEach(r => {
     const key = DISCOUNT_COUPON_MAP[r.discountType] || null;
-    if (!key) return;
+    if (!key || r.paidDiff) return;
     const item = COUPON_ITEMS.find(i => i.key === key);
     if (!item) return;
     allRows.push({
@@ -2645,9 +2624,8 @@ function renderCouponAllHistory() {
       : `<span class="hist-type-use">사용</span>`;
     const qty   = h.qty || 1;
     const delta = isGet ? `<span class="hist-delta-pos">+${qty}</span>` : `<span class="hist-delta-neg">-${qty}</span>`;
-    const d40   = h.key === 'discount40'   ? delta : '';
-    const d50   = h.key === 'discount50'   ? delta : '';
-    const dPas  = h.key === 'discountPass' ? delta : '';
+    const d40   = h.key === 'discount40' ? delta : '';
+    const d50   = h.key === 'discount50' ? delta : '';
     const milestoneBadge = h.isMilestone ? `<span class="hist-milestone-badge">달성</span>` : '';
     const memo  = `${h.comment || ''}${milestoneBadge}`;
     const delBtn = h.rowType === 'manual'
@@ -2656,7 +2634,7 @@ function renderCouponAllHistory() {
     return `<tr>
       <td style="text-align:left;white-space:nowrap;">${dateStr}</td>
       <td>${typeHtml}</td>
-      <td>${d40}</td><td>${d50}</td><td>${dPas}</td>
+      <td>${d40}</td><td>${d50}</td>
       <td style="text-align:left;color:var(--text2);font-size:11px;">${memo}</td>
       <td>${delBtn}</td>
     </tr>`;
@@ -2664,7 +2642,7 @@ function renderCouponAllHistory() {
 
   el.innerHTML = `<table class="coupon-hist-table">
     <thead><tr>
-      <th style="text-align:center;">날짜</th><th>유형</th><th>40%</th><th>50%</th><th>증빙</th><th style="text-align:center;">메모</th><th></th>
+      <th style="text-align:center;">날짜</th><th>유형</th><th>40%</th><th>50%</th><th style="text-align:center;">메모</th><th></th>
     </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
@@ -2762,7 +2740,7 @@ function exportData() {
   };
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
-  a.download = `roger_backup_${localDate()}.json`;
+  a.download = `eoduk_backup_${localDate()}.json`;
   a.click();
   showToast('백업 파일이 다운로드되었습니다');
 }
@@ -2810,7 +2788,7 @@ function migrateData() {
   // (notified 기반 동적 생성 + records 기반 동적 생성 방식으로 전환됐으므로 중복 방지)
   const coupons = getCoupons();
   let changed = false;
-  ['discount40','discount50','discountPass'].forEach(key => {
+  ['discount40','discount50'].forEach(key => {
     if (!coupons[key]?.history) return;
     const before = coupons[key].history.length;
     coupons[key].history = coupons[key].history.filter(h => {
