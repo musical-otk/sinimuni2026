@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>🌕 어둑시니 관극 다이어리</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#c86040">
+<meta name="theme-color" content="#9C2030">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="어둑시니">
@@ -13,20 +13,20 @@
   :root {
     --bg: #f8f8f6; --bg1: #ffffff; --bg2: #ffffff; --bg3: #f0f0ee;
     --border: #e0e0dc; --text: #1a1a1a; --text1: #1a1a1a; --text2: #555550; --text3: #999990;
-    --accent: #c86040; --accent2: #a04828; --accent-light: #fdf0ec;
+    --accent: #9C2030; --accent2: #6E1520; --accent-light: #F5E5E8;
     --danger: #cc4444; --success: #2a8a4a; --star: #f0a020;
-    --seat1: #fce8e0; --seat2: #f0b898; --seat3: #d8845a; --seat4: #c86040; --seat5: #8a3820;
+    --seat1: #eec0c8; --seat2: #d98090; --seat3: #bf4060; --seat4: #9C2030; --seat5: #6A1020;
     --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 12px; --tab-h: 64px;
   }
   [data-theme="dark"] {
     --bg: #111118; --bg1: #1a1a24; --bg2: #1a1a24; --bg3: #22222e;
     --border: #333340; --text: #f0f0f0; --text1: #f0f0f0; --text2: #aaaaaa; --text3: #666670;
-    --accent: #e07855; --accent2: #f09070; --accent-light: #3a1a10;
+    --accent: #E04060; --accent2: #C03050; --accent-light: #3A0F18;
     --danger: #ee6666; --success: #44aa66;
     --shadow: 0 2px 12px rgba(0,0,0,0.4);
-    --seat1: #5a1a22; --seat2: #8a1e2a; --seat3: #b82840; --seat4: #d94058; --seat5: #f05070;
+    --seat1: #7a1828; --seat2: #9c2035; --seat3: #c03050; --seat4: #e04060; --seat5: #f06080;
   }
-  [data-theme="dark"] .next-show-card { background: linear-gradient(135deg, #6a1525 0%, #a02535 100%); color: #fff; }
+  [data-theme="dark"] .next-show-card { background: linear-gradient(135deg, #5a1020 0%, #9C2030 100%); color: #fff; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Apple SD Gothic Neo', sans-serif;
@@ -166,10 +166,10 @@
   .cal-session-row { display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-top: 1px solid var(--border); }
   .cal-session-time { font-size: 12px; font-weight: 700; color: var(--text2); min-width: 36px; }
   .cal-session-casting { flex: 1; font-size: 13px; }
-  .cal-session-casting .sky { color: #3d4e75; font-weight: 600; }
-  .cal-session-casting .didi { color: #4a6e40; font-weight: 600; }
-  [data-theme="dark"] .cal-session-casting .sky { color: #8099cc; }
-  [data-theme="dark"] .cal-session-casting .didi { color: #7aaa60; }
+  .cal-session-casting .sky { color: #8C2030; font-weight: 600; }
+  .cal-session-casting .didi { color: #2A6878; font-weight: 600; }
+  [data-theme="dark"] .cal-session-casting .sky { color: #E08090; }
+  [data-theme="dark"] .cal-session-casting .didi { color: #60A8B8; }
   .cal-session-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: 600; white-space: nowrap; }
   .cal-session-badge.done   { background: var(--accent-light); color: var(--accent); }
   .cal-session-badge.booked { background: #e6f9ee; color: var(--success); }
@@ -221,10 +221,10 @@
   .schedule-row.today-row { background: var(--accent-light); }
   .time-badge { font-size: 11px; background: var(--bg3); padding: 2px 6px; border-radius: 4px; color: var(--text2); }
   .actor-pill { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
-  .actor-pill.sky { background: #e8ecf5; color: #3d4e75; }
-  .actor-pill.didi { background: #e5f0e0; color: #4a6e40; }
-  [data-theme="dark"] .actor-pill.sky { background: #1e2a42; color: #8099cc; }
-  [data-theme="dark"] .actor-pill.didi { background: #1a2e18; color: #7aaa60; }
+  .actor-pill.sky { background: #F5E5E8; color: #8C2030; }
+  .actor-pill.didi { background: #E0F0F5; color: #2A6878; }
+  [data-theme="dark"] .actor-pill.sky { background: #3A0F18; color: #E08090; }
+  [data-theme="dark"] .actor-pill.didi { background: #0F2A30; color: #60A8B8; }
 
   /* STAMP / COUPON */
   .stamp-cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -302,10 +302,10 @@
   .detail-field-value { font-size: 15px; font-weight: 500; }
   .casting-display { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
   .casting-tag { padding: 6px 14px; border-radius: 20px; font-size: 14px; font-weight: 600; }
-  .casting-tag.sky { background: #e8ecf5; color: #3d4e75; }
-  .casting-tag.didi { background: #e5f0e0; color: #4a6e40; }
-  [data-theme="dark"] .casting-tag.sky { background: #1e2a42; color: #8099cc; }
-  [data-theme="dark"] .casting-tag.didi { background: #1a2e18; color: #7aaa60; }
+  .casting-tag.sky { background: #F5E5E8; color: #8C2030; }
+  .casting-tag.didi { background: #E0F0F5; color: #2A6878; }
+  [data-theme="dark"] .casting-tag.sky { background: #3A0F18; color: #E08090; }
+  [data-theme="dark"] .casting-tag.didi { background: #0F2A30; color: #60A8B8; }
 
   /* HOME */
   .next-show-card { background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%); border-radius: var(--radius); padding: 18px; margin-bottom: 8px; color: #fff; position: relative; overflow: hidden; cursor: pointer; }
