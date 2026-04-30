@@ -86,11 +86,15 @@
   .form-control {
     width: 100%; padding: 10px 12px; border: 1.5px solid var(--border);
     border-radius: 8px; background: var(--bg); color: var(--text);
-    font-size: 14px; outline: none; transition: border-color 0.2s;
+    font-size: 16px; outline: none; transition: border-color 0.2s;
+    box-sizing: border-box; -webkit-appearance: none; appearance: none;
+    font-family: inherit; line-height: 1.4;
   }
   .form-control:focus { border-color: var(--accent); }
-  @supports (-webkit-touch-callout: none) {
-    input[type="date"].form-control { height: 44px; }
+  select.form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 32px;
   }
   .form-row { display: flex; gap: 10px; }
   .form-row .form-group { flex: 1; }
@@ -393,7 +397,7 @@
   </div>
   <div class="card">
     <div class="card-title" onclick="toggleHomeStamps()" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:0;">
-      <span>🎟 재관람 카드 현황</span>
+      <span>👻 재관람 카드 현황</span>
       <span id="home-stamps-toggle-icon" style="font-size:11px;color:var(--text3);">▲</span>
     </div>
     <div id="home-stamps-wrap">
@@ -764,7 +768,7 @@
       <button class="btn-icon" onclick="closePanel('overlay-stamp')">✕</button>
     </div>
     <div style="background:var(--accent-light);border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:var(--accent);">
-      <div style="font-weight:700;margin-bottom:6px;">🎟 재관람 카드 혜택</div>
+      <div style="font-weight:700;margin-bottom:6px;">👻 재관람 카드 혜택</div>
       <div style="display:flex;gap:8px;margin-bottom:8px;">
         <div style="flex:1;text-align:center;background:var(--bg1);border-radius:8px;padding:6px 4px;">
           <div style="font-size:11px;color:var(--text3);margin-bottom:2px;">3회 달성</div>
@@ -1065,7 +1069,7 @@ function populateStampSelect(keepBoardId) {
     items.forEach(b => {
       const o = document.createElement('option');
       o.value = b.id;
-      o.textContent = `[🎟 ${b.name}] (${b.currentCount}/${b.totalSlots})${suffix}`;
+      o.textContent = `[👻 ${b.name}] (${b.currentCount}/${b.totalSlots})${suffix}`;
       // 현재 기록에 연동된 도장판은 완료/일시정지 상태라도 선택 가능하게 유지
       if (disabled && b.id !== keepBoardId) {
         o.disabled = true;
@@ -1324,7 +1328,7 @@ function openDetail(id) {
       if (seq === null) seq = board.currentCount;
       const qty = r.stampQty || 1;
       const seqLabel = qty > 1 ? `[${seq}~${seq+qty-1}번째 도장] ×${qty}` : `${seq}번째 도장`;
-      html += `<div class="detail-field"><div class="detail-field-label">재관람 카드</div><div class="detail-field-value">[🎟 ${board.name}] ${seqLabel}</div></div>`;
+      html += `<div class="detail-field"><div class="detail-field-label">재관람 카드</div><div class="detail-field-value">[👻 ${board.name}] ${seqLabel}</div></div>`;
     }
   }
   if (r.memo) html += `<div class="detail-field"><div class="detail-field-label">감상 메모</div><div class="detail-field-value" style="font-size:14px;line-height:1.6;white-space:pre-wrap;">${r.memo}</div></div>`;
@@ -1501,7 +1505,7 @@ function renderHome() {
         const actualPct    = Math.min(100, Math.round(cur   / b.totalSlots * 100));
         const done = cur >= b.totalSlots;
         return `<div class="home-stamp-row">
-          <div class="home-stamp-name">[🎟 ${b.name}]${done?' 🎉':''}</div>
+          <div class="home-stamp-name">[👻 ${b.name}]${done?' 🎉':''}</div>
           <div class="home-stamp-bar">
             <div class="home-stamp-bar-fill scheduled" style="width:${scheduledPct}%"></div>
             <div class="home-stamp-bar-fill actual"    style="width:${actualPct}%"></div>
@@ -2058,7 +2062,7 @@ function renderStampBoards() {
 
     return `<div class="stamp-board${paused ? ' paused' : ''}">
       <div class="stamp-board-header">
-        <div class="stamp-board-name">[🎟 ${b.name}]</div>
+        <div class="stamp-board-name">[👻 ${b.name}]</div>
         <div class="stamp-board-menu">
           <button class="stamp-menu-btn" onclick="renameStampBoard('${b.id}')" title="이름 변경">📝</button>
           <button class="stamp-menu-btn" onclick="togglePauseStampBoard('${b.id}')" title="${paused ? '재개' : '일시정지'}">${paused ? '▶' : '⏸'}</button>
@@ -2105,7 +2109,7 @@ function renderStampHistoryPanel() {
   const board  = boards.find(b => b.id === boardId);
   if (!board) return;
 
-  document.getElementById('stamp-history-panel-title').textContent = `[🎟 ${board.name}] 이력`;
+  document.getElementById('stamp-history-panel-title').textContent = `[👻 ${board.name}] 이력`;
   const sortedHistory = [...(board.history||[])].sort((a,z) => a.date.localeCompare(z.date));
   const el = document.getElementById('stamp-history-panel-content');
 
