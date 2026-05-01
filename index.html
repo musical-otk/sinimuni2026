@@ -1540,8 +1540,8 @@ function renderHome() {
   document.getElementById('home-coupons').innerHTML =
     `<div class="coupon-cards">${homeCouponItems.map(item => {
       const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
-        + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).length,0);
-      const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key).length
+        + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).reduce((t,m)=>t+(m.qty||1),0),0);
+      const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key&&!r.paidDiff).length
         + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
       return `<div class="coupon-card">
         <div class="coupon-card-label">${item.label}</div>
@@ -2543,8 +2543,8 @@ function renderCouponList() {
     const final = calcFinal(item.key);                                         // 전체 기준
     // 최종 기준 적립/사용 합산
     const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
-      + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).length,0);
-    const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key).length
+      + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).reduce((t,m)=>t+(m.qty||1),0),0);
+    const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key&&!r.paidDiff).length
       + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
     return `<div class="coupon-card">
       <div class="coupon-card-label">${item.label}</div>
