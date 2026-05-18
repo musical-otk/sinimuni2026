@@ -158,7 +158,7 @@
   .cal-filter { margin-bottom: 10px; }
   .cal-filter-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; flex-wrap: wrap; }
   .cal-filter-label { font-size: 11px; color: var(--text3); font-weight: 600; min-width: 36px; }
-  .cal-chip { padding: 3px 9px; border-radius: 12px; font-size: 11px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
+  .cal-chip { padding: 3px 9px; border-radius: 12px; font-size: 11px; border: 1px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; min-width: 52px; text-align: center; }
   .cal-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
   /* 날짜 클릭 패널 */
   .cal-day-panel { background: var(--bg1); border-radius: var(--radius); border: 1px solid var(--border); margin-top: 8px; overflow: hidden; }
@@ -428,19 +428,19 @@
     <div class="cal-filter-row">
       <span class="cal-filter-label">어둑시니</span>
       <div id="cal-chips-sky" style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button class="cal-chip active" onclick="setCalFilterSky(null,this)">전체</button>
-        <button class="cal-chip" onclick="setCalFilterSky('강찬',this)">강찬</button>
-        <button class="cal-chip" onclick="setCalFilterSky('조모세',this)">조모세</button>
-        <button class="cal-chip" onclick="setCalFilterSky('박두호',this)">박두호</button>
+        <button class="cal-chip active" data-name="" onclick="setCalFilterSky(null,this)">전체</button>
+        <button class="cal-chip" data-name="강찬" onclick="setCalFilterSky('강찬',this)">강찬</button>
+        <button class="cal-chip" data-name="조모세" onclick="setCalFilterSky('조모세',this)">조모세</button>
+        <button class="cal-chip" data-name="박두호" onclick="setCalFilterSky('박두호',this)">박두호</button>
       </div>
     </div>
     <div class="cal-filter-row">
       <span class="cal-filter-label">소문</span>
       <div id="cal-chips-didi" style="display:flex;gap:6px;flex-wrap:wrap;">
-        <button class="cal-chip active" onclick="setCalFilterDidi(null,this)">전체</button>
-        <button class="cal-chip" onclick="setCalFilterDidi('이한솔',this)">이한솔</button>
-        <button class="cal-chip" onclick="setCalFilterDidi('신주협',this)">신주협</button>
-        <button class="cal-chip" onclick="setCalFilterDidi('류동휘',this)">류동휘</button>
+        <button class="cal-chip active" data-name="" onclick="setCalFilterDidi(null,this)">전체</button>
+        <button class="cal-chip" data-name="이한솔" onclick="setCalFilterDidi('이한솔',this)">이한솔</button>
+        <button class="cal-chip" data-name="신주협" onclick="setCalFilterDidi('신주협',this)">신주협</button>
+        <button class="cal-chip" data-name="류동휘" onclick="setCalFilterDidi('류동휘',this)">류동휘</button>
       </div>
     </div>
     <div id="cal-filter-hint" style="font-size:11px;color:var(--text3);padding:2px 0 4px;">배우를 선택하면 해당 회차가 표시됩니다</div>
@@ -496,7 +496,10 @@
     <table class="stats-table" id="stats-actors"></table>
   </div>
   <div class="card">
-    <div class="card-title">🔗 페어 조합별</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div class="card-title" style="margin:0;">🔗 페어 조합별</div>
+      <button class="btn btn-outline btn-sm" id="pair-sort-btn" onclick="togglePairSort()" style="font-size:11px;white-space:nowrap;">어둑시니 기준</button>
+    </div>
     <table class="stats-table" id="stats-pairs"></table>
   </div>
   <div class="card">
@@ -1592,35 +1595,59 @@ function renderHome() {
 // CALENDAR (스케줄 통합)
 // ============================================================
 let calYear, calMonth;
-let calFilterSky  = null;
-let calFilterDidi = null;
+let calFilterSky  = [];
+let calFilterDidi = [];
 let calSelectedDs = null;
+let pairSortBy = DB.get('pairSortBy', 'sky');
 
-function initCal() { const n=new Date(); const start=new Date(2026,5,1); calYear=(n>=start?n:start).getFullYear(); calMonth=(n>=start?n:start).getMonth(); }
+function initCal() {
+  const n=new Date(); const start=new Date(2026,5,1);
+  calYear=(n>=start?n:start).getFullYear(); calMonth=(n>=start?n:start).getMonth();
+  const toArr = v => Array.isArray(v) ? v : (v ? [v] : []);
+  calFilterSky  = toArr(DB.get('calFilterSky',  []));
+  calFilterDidi = toArr(DB.get('calFilterDidi', []));
+}
 function calPrev() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} calSelectedDs=null; renderCalendar(); }
 function calNext() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} calSelectedDs=null; renderCalendar(); }
 
+function toggleCalFilter(arr, name) {
+  if (!name) return [];
+  const idx = arr.indexOf(name);
+  return idx === -1 ? [...arr, name] : arr.filter(x => x !== name);
+}
 function setCalFilterSky(name, btn) {
-  calFilterSky = name;
-  document.querySelectorAll('#cal-chips-sky .cal-chip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  updateCalFilterHint();
+  calFilterSky = name === null ? [] : toggleCalFilter(calFilterSky, name);
+  DB.set('calFilterSky', calFilterSky);
+  applyCalFilterUI();
   renderCalendar();
 }
 function setCalFilterDidi(name, btn) {
-  calFilterDidi = name;
-  document.querySelectorAll('#cal-chips-didi .cal-chip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  updateCalFilterHint();
+  calFilterDidi = name === null ? [] : toggleCalFilter(calFilterDidi, name);
+  DB.set('calFilterDidi', calFilterDidi);
+  applyCalFilterUI();
   renderCalendar();
 }
 function updateCalFilterHint() {
   const el = document.getElementById('cal-filter-hint');
   if (!el) return;
-  const hasFilter = calFilterSky || calFilterDidi;
-  el.textContent = hasFilter
-    ? `· ${[calFilterSky, calFilterDidi].filter(Boolean).join(' · ')} 회차 표시 중`
-    : '· 전체 회차 표시 중';
+  const parts = [...(Array.isArray(calFilterSky)?calFilterSky:[]), ...(Array.isArray(calFilterDidi)?calFilterDidi:[])];
+  el.textContent = parts.length ? `· ${parts.join(' · ')} 회차 표시 중` : '· 전체 회차 표시 중';
+}
+function applyCalFilterUI() {
+  function syncRow(containerId, arr) {
+    document.querySelectorAll(`#${containerId} .cal-chip`).forEach(b => {
+      const bName = b.dataset.name;
+      b.classList.toggle('active', bName === '' ? arr.length === 0 : arr.includes(bName));
+    });
+  }
+  syncRow('cal-chips-sky',  calFilterSky);
+  syncRow('cal-chips-didi', calFilterDidi);
+  updateCalFilterHint();
+}
+function togglePairSort() {
+  pairSortBy = pairSortBy === 'sky' ? 'didi' : 'sky';
+  DB.set('pairSortBy', pairSortBy);
+  renderStats();
 }
 
 function getEventsForDate(ds, events) {
@@ -1700,8 +1727,8 @@ function renderCalendar() {
       const dow2 = new Date(calYear, calMonth, day).getDay();
       const daySch = schByDate[ds] || [];
       const filteredDaySch = daySch.filter(s =>
-        (!calFilterSky  || s.eoduksini === calFilterSky) &&
-        (!calFilterDidi || s.somun   === calFilterDidi)
+        (calFilterSky.length  === 0 || calFilterSky.includes(s.eoduksini)) &&
+        (calFilterDidi.length === 0 || calFilterDidi.includes(s.somun))
       );
 
       let cls = 'cal-day';
@@ -1855,11 +1882,13 @@ function renderStats() {
   didi.forEach(a => { ah += `<tr><td>${a}</td><td style="color:var(--text3)">${countSch('somun',a)}</td><td>${countAct('somun',a)}</td></tr>`; });
   document.getElementById('stats-actors').innerHTML = ah;
 
-  const pairs = [
-    ['강찬','이한솔'], ['강찬','신주협'], ['강찬','류동휘'],
-    ['조모세','이한솔'],['조모세','신주협'],['조모세','류동휘'],
-    ['박두호','이한솔'],['박두호','신주협'],['박두호','류동휘']
-  ];
+  const pairBtn = document.getElementById('pair-sort-btn');
+  if (pairBtn) pairBtn.textContent = pairSortBy === 'sky' ? '어둑시니 기준' : '소문 기준';
+  const skyList  = ['강찬','조모세','박두호'];
+  const didiList = ['이한솔','신주협','류동휘'];
+  const pairs = pairSortBy === 'didi'
+    ? didiList.flatMap(d => skyList.map(s => [s, d]))
+    : skyList.flatMap(s => didiList.map(d => [s, d]));
   let ph = '<tr><th>어둑시니</th><th>소문</th><th>총 회차</th><th>관람</th></tr>';
   pairs.forEach(([s,d]) => {
     const tot = schedule.filter(x=>x.eoduksini===s&&x.somun===d).length;
@@ -2597,7 +2626,7 @@ function renderCouponAllHistory() {
       const date = getStampAchievedDate(b, m.at);
       allRows.push({
         date, type: '획득', key, short: item.short,
-        comment: `[📡 ${b.name}] ${m.at}칸 달성`,
+        comment: `[🎫 ${b.name}] ${m.at}칸 달성`,
         isMilestone: true, qty: 1, originalIdx: -1, rowType: 'milestone'
       });
     });
@@ -2816,7 +2845,7 @@ function migrateData() {
     if (!coupons[key]?.history) return;
     const before = coupons[key].history.length;
     coupons[key].history = coupons[key].history.filter(h => {
-      if (h.type === '복원') return false;
+      if (h.type === '복원' && h.comment !== '기록 삭제로 복원') return false;
       if (h.comment && (h.comment.includes('달성 보상') || h.comment.includes('칸 달성'))) return false;
       // 관람 연동으로 자동 생성된 사용 항목 (예: "고상호×이한솔 관람 사용")
       if (h.type === '사용' && h.comment && h.comment.includes('관람 사용')) return false;
