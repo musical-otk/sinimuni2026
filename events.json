@@ -4,5 +4,17 @@
     "startDate": "2026-06-09",
     "endDate": "2026-06-14",
     "color": "#4CAF50"
+  },
+  {
+    "name": "커튼콜",
+    "startDate": "2026-06-16",
+    "endDate": "2026-06-21",
+    "color": "#E57373"
+  },
+  {
+    "name": "트리플 적립",
+    "startDate": "2026-06-16",
+    "endDate": "2026-06-21",
+    "color": "#FFB74D"
   }
 ]
