@@ -1156,7 +1156,9 @@ function editRecord(id) {
   const hasCouponEdit = DISCOUNT_COUPON_MAP[r.discountType||''] || null;
   document.getElementById('rec-paid-diff-group').style.display = hasCouponEdit ? '' : 'none';
   const paidDiffVal = r.paidDiff === true ? 'coupon' : (r.paidDiff || '');
-  document.querySelector(`input[name="rec-paid-diff"][value="${paidDiffVal}"]`).checked = true;
+  document.querySelectorAll('input[name="rec-paid-diff"]').forEach(r => r.checked = false);
+  const paidDiffEl = document.querySelector(`input[name="rec-paid-diff"][value="${paidDiffVal}"]`);
+  if (paidDiffEl) paidDiffEl.checked = true;
   document.getElementById('rec-comment').value = r.comment||'';
   document.getElementById('rec-memo').value = r.memo||'';
   // isBooked: true by default; unconfirmed = !isBooked
