@@ -1375,7 +1375,8 @@ function openDetail(id) {
         cumulative += hQty;
       }
       if (seq === null) seq = board.currentCount;
-      const qty = r.stampQty || 1;
+      const histEntry = sorted.find(h => h.recordId ? h.recordId === r.id : h.date === r.date);
+      const qty = histEntry ? (histEntry.qty || 1) : (r.stampQty || 1);
       const seqLabel = qty > 1 ? `[${seq}~${seq+qty-1}번째 도장] ×${qty}` : `${seq}번째 도장`;
       html += `<div class="detail-field"><div class="detail-field-label">재관람 카드</div><div class="detail-field-value">[👻 ${board.name}] ${seqLabel}</div></div>`;
     }
@@ -2658,7 +2659,7 @@ function renderCouponList() {
     const future = boards.reduce((sum, b) => {
       const totalEntered = (b.history||[]).reduce((t, h) => t + (h.qty||1), 0);
       return sum + (b.milestones || []).filter(m =>
-        (m.couponKey || 'discount50') === key && !m.notified && totalEntered >= m.at
+        m.couponKey === key && !m.notified && totalEntered >= m.at
       ).length;
     }, 0);
     return allUsed + future;
@@ -2711,7 +2712,8 @@ function renderCouponAllHistory() {
   boards.forEach(b => {
     (b.milestones || []).forEach(m => {
       if (!m.notified) return;
-      const key = m.couponKey || 'discount50';
+      const key = m.couponKey;
+      if (!key) return;
       const item = COUPON_ITEMS.find(i => i.key === key);
       if (!item) return;
       const date = getStampAchievedDate(b, m.at);
