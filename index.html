@@ -1687,6 +1687,7 @@ function getEventsForDate(ds, events) {
 
 function renderCalendar() {
   if (calYear===undefined) initCal();
+  applyCalFilterUI();
   const records  = getRecords();
   const schedule = getSchedule();
   const events   = getEvents();
