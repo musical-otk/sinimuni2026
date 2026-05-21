@@ -1035,12 +1035,12 @@ function autoFillCasting() {
     });
     if (matches.length===1) {
       timeSelect.value = matches[0].time;
-      document.getElementById('rec-skylar').value = matches[0].skylar||'';
-      document.getElementById('rec-didi').value   = matches[0].didi||'';
+      document.getElementById('rec-skylar').value = matches[0].eoduksini||'';
+      document.getElementById('rec-didi').value   = matches[0].somun||'';
     } else if (cur) {
       timeSelect.value = cur;
       const m = matches.find(s=>s.time===cur);
-      if (m) { document.getElementById('rec-skylar').value=m.skylar||''; document.getElementById('rec-didi').value=m.didi||''; }
+      if (m) { document.getElementById('rec-skylar').value=m.eoduksini||''; document.getElementById('rec-didi').value=m.somun||''; }
     }
   } else { resetTimeOptions(); }
 }
@@ -1049,7 +1049,7 @@ function onTimeChange() {
   const time = document.getElementById('rec-time').value;
   if (!date||!time) return;
   const m = getSchedule().find(s=>s.date===date&&s.time===time);
-  if (m) { document.getElementById('rec-skylar').value=m.skylar||''; document.getElementById('rec-didi').value=m.didi||''; }
+  if (m) { document.getElementById('rec-skylar').value=m.eoduksini||''; document.getElementById('rec-didi').value=m.somun||''; }
 }
 function resetTimeOptions() {
   document.getElementById('rec-time').innerHTML = `<option value="">선택</option><option value="14:00">14:00</option><option value="18:00">18:00</option><option value="20:00">20:00</option>`;
