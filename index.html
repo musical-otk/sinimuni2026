@@ -674,11 +674,8 @@
         <option value="50% 할인권">50% 할인권</option>
       </select>
       <div id="rec-discount-warn" style="display:none;margin-top:6px;font-size:12px;color:var(--danger);">⚠ 현재 보유한 쿠폰이 없습니다</div>
-      <div id="rec-paid-diff-group" style="display:none;margin-top:8px;display:flex;gap:8px;">
-        <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;color:var(--text2);">
-          <input type="radio" name="rec-paid-diff" id="rec-paid-diff-none" value="" checked style="accent-color:var(--accent);">
-          일반 사용
-        </label>
+      <div id="rec-paid-diff-group" style="display:none;margin-top:8px;display:flex;gap:12px;">
+        <input type="hidden" id="rec-paid-diff-none" value="">
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;color:var(--text2);">
           <input type="radio" name="rec-paid-diff" id="rec-paid-diff-coupon" value="coupon" style="accent-color:var(--accent);">
           차액 지불 (40%)
@@ -1127,7 +1124,7 @@ function openAddRecord(date) {
   document.getElementById('rec-discount-type').value = '';
   document.getElementById('rec-discount-warn').style.display = 'none';
   document.getElementById('rec-paid-diff-group').style.display = 'none';
-  document.getElementById('rec-paid-diff-none').checked = true;
+  document.querySelectorAll('input[name="rec-paid-diff"]').forEach(r=>r.checked=false);
   document.getElementById('rec-comment').value = '';
   document.getElementById('rec-memo').value = '';
   document.getElementById('rec-unconfirmed').checked = false;
@@ -2548,7 +2545,7 @@ function onDiscountTypeChange() {
   } else {
     warn.style.display = 'none';
     paidDiffGroup.style.display = 'none';
-    document.getElementById('rec-paid-diff-none').checked = true;
+    document.querySelectorAll('input[name="rec-paid-diff"]').forEach(r=>r.checked=false);
   }
 }
 
