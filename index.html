@@ -1286,15 +1286,43 @@ function saveRecord() {
   } else {
     records.push(record);
     if (stampBoardId) {
-      const toastMsg = applyStampToBoard(stampBoardId, stampQty, date, `${eoduksini} · ${somun} 관람 연동`);
-      // 방금 추가된 history에 recordId 심기 (수정 시 정확한 삭제를 위해)
+      // overflow 체크
+      const boardsChk = getStampBoards();
+      const boardChk  = boardsChk.find(b => b.id === stampBoardId);
+      let overflowNewBoardId = null;
+      if (boardChk) {
+        recalcStampCount(boardChk);
+        const remaining = boardChk.totalSlots - boardChk.currentCount;
+        if (stampQty > remaining) {
+          const overflow = stampQty - remaining;
+          if (!confirm(`현재 도장판이 완료됩니다.\n새 도장판에 ${overflow}개를 추가합니다.\n계속하시겠습니까?`)) {
+            records.pop();
+            return;
+          }
+          overflowNewBoardId = createNewStampBoard();
+        }
+      }
+      const applyQty = overflowNewBoardId ? (boardChk.totalSlots - boardChk.currentCount) : stampQty;
+      const toastMsg = applyStampToBoard(stampBoardId, applyQty, date, `${eoduksini} · ${somun} 관람 연동`);
       const boards2 = getStampBoards();
       const board2  = boards2.find(b => b.id === stampBoardId);
       if (board2 && board2.history && board2.history.length) {
         board2.history[board2.history.length - 1].recordId = record.id;
         saveStampBoards(boards2);
       }
-      showToast(toastMsg || '기록이 추가되었습니다');
+      if (overflowNewBoardId) {
+        const overflow = stampQty - applyQty;
+        applyStampToBoard(overflowNewBoardId, overflow, date, `${eoduksini} · ${somun} 관람 연동 (이월)`);
+        const boards3 = getStampBoards();
+        const board3  = boards3.find(b => b.id === overflowNewBoardId);
+        if (board3 && board3.history && board3.history.length) {
+          board3.history[board3.history.length - 1].recordId = record.id;
+          saveStampBoards(boards3);
+        }
+        showToast(`도장판 완성! 새 도장판에 ${overflow}개 추가됨`);
+      } else {
+        showToast(toastMsg || '기록이 추가되었습니다');
+      }
     } else {
       showToast('기록이 추가되었습니다');
     }
@@ -2370,6 +2398,24 @@ function revalidateMilestones(board) {
   });
 }
 
+function createNewStampBoard() {
+  const boards = getStampBoards();
+  const maxNum = boards.reduce((max, b) => { const n = parseInt(b.name); return (!isNaN(n) && n > max) ? n : max; }, 0);
+  const newBoard = {
+    id: uuid(), name: String(maxNum + 1), totalSlots: 7,
+    reward: '실황 OST',
+    milestones: [
+      { at:3, reward:'40% 할인권', couponKey:'discount40', notified:false },
+      { at:4, reward:'50% 할인권', couponKey:'discount50', notified:false },
+      { at:7, reward:'실황 OST',   couponKey:null,          notified:false }
+    ],
+    currentCount: 0, history: []
+  };
+  boards.push(newBoard);
+  saveStampBoards(boards);
+  return newBoard.id;
+}
+
 function applyStampToBoard(boardId, qty, date, historyComment, comment) {
   const boards = getStampBoards();
   const board  = boards.find(b => b.id === boardId);
@@ -2420,6 +2466,25 @@ function addStamp() {
   const fullMethod = sessionEl ? `${method} (${sessionEl.value})` : method;
   const comment   = document.getElementById('stamp-comment')?.value.trim() || '';
 
+  // overflow 체크
+  const boardsNow = getStampBoards();
+  const boardNow  = boardsNow.find(b => b.id === boardId);
+  if (boardNow) {
+    recalcStampCount(boardNow);
+    const remaining = boardNow.totalSlots - boardNow.currentCount;
+    if (qty > remaining) {
+      const overflow = qty - remaining;
+      if (!confirm(`현재 도장판이 완료됩니다.\n새 도장판에 ${overflow}개를 추가합니다.\n계속하시겠습니까?`)) return;
+      applyStampToBoard(boardId, remaining, date, fullMethod, comment);
+      const newBoardId = createNewStampBoard();
+      applyStampToBoard(newBoardId, overflow, date, fullMethod + ' (이월)', comment);
+      closePanel('overlay-add-stamp');
+      showToast(`도장판 완성! 새 도장판에 ${overflow}개 추가됨`);
+      renderStampBoards(); renderCouponList(); renderHome();
+      if (_directStampFromHistory) { _directStampFromHistory = false; renderStampHistoryPanel(); openPanel('overlay-stamp-history'); }
+      return;
+    }
+  }
   const toastMsg = applyStampToBoard(boardId, qty, date, fullMethod, comment);
   if (!toastMsg) return;
   closePanel('overlay-add-stamp');
