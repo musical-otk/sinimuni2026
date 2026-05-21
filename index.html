@@ -1155,7 +1155,7 @@ function editRecord(id) {
   document.getElementById('rec-discount-warn').style.display = 'none';
   const hasCouponEdit = DISCOUNT_COUPON_MAP[r.discountType||''] || null;
   document.getElementById('rec-paid-diff-group').style.display = hasCouponEdit ? '' : 'none';
-  const paidDiffVal = r.paidDiff === true ? 'coupon' : (r.paidDiff || '');
+  const paidDiffVal = r.paidDiff === true ? 'other' : (r.paidDiff || '');
   document.querySelectorAll('input[name="rec-paid-diff"]').forEach(r => r.checked = false);
   const paidDiffEl = document.querySelector(`input[name="rec-paid-diff"][value="${paidDiffVal}"]`);
   if (paidDiffEl) paidDiffEl.checked = true;
@@ -1360,7 +1360,7 @@ function openDetail(id) {
     html += `<div class="detail-field"><div class="detail-field-label">좌석</div><div class="detail-field-value">${r.seatZone}구역 ${r.seatRow}열 ${r.seatNumber}번</div></div>`;
     html += buildMiniSeat(r.seatZone, r.seatRow, r.seatNumber);
   }
-  if (r.price != null && r.price !== '') html += `<div class="detail-field"><div class="detail-field-label">티켓 가격</div><div class="detail-field-value">₩${r.price.toLocaleString()}${r.discountType ? ` <span style="font-size:11px;color:var(--accent);background:var(--accent-light);padding:2px 6px;border-radius:4px;margin-left:4px;">${DISCOUNT_LABEL[r.discountType] || r.discountType}</span>${r.paidDiff ? ` <span style="font-size:10px;color:var(--text3);">${r.paidDiff==='other'?'차액지불(재관람/기타)':'차액지불(40%)'}</span>` : ''}` : ''}</div></div>`;
+  if (r.price != null && r.price !== '') html += `<div class="detail-field"><div class="detail-field-label">티켓 가격</div><div class="detail-field-value">₩${r.price.toLocaleString()}${r.discountType ? ` <span style="font-size:11px;color:var(--accent);background:var(--accent-light);padding:2px 6px;border-radius:4px;margin-left:4px;">${DISCOUNT_LABEL[r.discountType] || r.discountType}</span>${r.paidDiff ? ` <span style="font-size:10px;color:var(--text3);">${(r.paidDiff==='other'||r.paidDiff===true)?'차액지불(재관람/기타)':'차액지불(40%)'}</span>` : ''}` : ''}</div></div>`;
   if (r.stampBoardId) {
     const boards = getStampBoards();
     const board  = boards.find(b => b.id === r.stampBoardId);
@@ -1590,7 +1590,7 @@ function renderHome() {
     `<div class="coupon-cards">${homeCouponItems.map(item => {
       const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
         + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).reduce((t,m)=>t+(m.qty||1),0),0);
-      const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key&&r.paidDiff!=='other').length
+      const used   = records.filter(r=>(r.paidDiff==='coupon' ? item.key==='discount40' : r.paidDiff!=='other'&&r.paidDiff!==true&&(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key)).length
         + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
       return `<div class="coupon-card">
         <div class="coupon-card-label">${item.label}</div>
@@ -2544,6 +2544,10 @@ function onDiscountTypeChange() {
     const avail   = calcCouponCount(couponKey, coupons, boards, records);
     warn.style.display = avail <= 0 ? '' : 'none';
     paidDiffGroup.style.display = '';
+    // 40% 할인권은 재관람/기타 차액지불만 해당
+    const couponOption = document.getElementById('rec-paid-diff-coupon');
+    if (couponOption) couponOption.closest('label').style.display = val === '40% 할인권' ? 'none' : '';
+    if (val === '40% 할인권' && couponOption?.checked) couponOption.checked = false;
   } else {
     warn.style.display = 'none';
     paidDiffGroup.style.display = 'none';
@@ -2608,12 +2612,18 @@ function calcCouponCount(key, coupons, boards, records, asOf) {
       return achievedDate && achievedDate <= asOf;
     }).length;
   }, 0);
-  // ③ 관람 기록 할인권 사용분 — asOf 기준 날짜만 차감, 차액지불은 스킵
-  const used = records.filter(r =>
-    (DISCOUNT_COUPON_MAP[r.discountType] || null) === key &&
-    (!asOf || r.date <= asOf) &&
-    r.paidDiff!=='other'
-  ).length;
+  // ③ 관람 기록 할인권 사용분
+  // - 차액지불(40%): discount40에서 차감 (discountType 무관)
+  // - 일반 사용: DISCOUNT_COUPON_MAP[discountType] 기준
+  // - 차액지불(재관람/기타): 차감 안 함
+  const used = records.filter(r => {
+    if (!asOf || r.date <= asOf) {
+      if (r.paidDiff === 'coupon') return key === 'discount40';
+      if (r.paidDiff === 'other' || r.paidDiff === true) return false;
+      return (DISCOUNT_COUPON_MAP[r.discountType] || null) === key;
+    }
+    return false;
+  }).length;
   return Math.max(0, manual + stampBonus - used);
 }
 
@@ -2660,7 +2670,7 @@ function renderCouponList() {
     // 최종 기준 적립/사용 합산
     const earned = (coupons[item.key].history||[]).filter(h=>h.type==='획득'||h.type==='복원').reduce((s,h)=>s+(h.qty||1),0)
       + boards.reduce((s,b)=>s+(b.milestones||[]).filter(m=>m.couponKey===item.key&&m.notified).reduce((t,m)=>t+(m.qty||1),0),0);
-    const used   = records.filter(r=>(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key&&r.paidDiff!=='other').length
+    const used   = records.filter(r=>(r.paidDiff==='coupon' ? item.key==='discount40' : r.paidDiff!=='other'&&r.paidDiff!==true&&(DISCOUNT_COUPON_MAP[r.discountType]||null)===item.key)).length
       + (coupons[item.key].history||[]).filter(h=>h.type==='사용').reduce((s,h)=>s+(h.qty||1),0);
     return `<div class="coupon-card">
       <div class="coupon-card-label">${item.label}</div>
@@ -2715,8 +2725,9 @@ function renderCouponAllHistory() {
 
   // ③ 관람 기록 할인권 사용분 — records에서 동적 생성 (삭제 불가, 차액지불 제외)
   records.forEach(r => {
-    const key = DISCOUNT_COUPON_MAP[r.discountType] || null;
-    if (!key || r.paidDiff==='other') return;
+    if (r.paidDiff === 'other' || r.paidDiff === true) return;
+    const key = r.paidDiff === 'coupon' ? 'discount40' : (DISCOUNT_COUPON_MAP[r.discountType] || null);
+    if (!key) return;
     const item = COUPON_ITEMS.find(i => i.key === key);
     if (!item) return;
     allRows.push({
