@@ -684,11 +684,11 @@
       <div id="rec-paid-diff-group" style="display:none;margin-top:8px;display:flex;gap:12px;">
         <input type="hidden" id="rec-paid-diff-none" value="">
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;color:var(--text2);">
-          <input type="radio" name="rec-paid-diff" id="rec-paid-diff-other" value="other" style="accent-color:var(--accent);">
+          <input type="radio" name="rec-paid-diff" id="rec-paid-diff-other" value="other" style="accent-color:var(--accent);" onmousedown="paidDiffMouseDown(this)" onclick="paidDiffClick(this)">
           차액 지불 (재관람/기타)
         </label>
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer;color:var(--text2);">
-          <input type="radio" name="rec-paid-diff" id="rec-paid-diff-coupon" value="coupon" style="accent-color:var(--accent);">
+          <input type="radio" name="rec-paid-diff" id="rec-paid-diff-coupon" value="coupon" style="accent-color:var(--accent);" onmousedown="paidDiffMouseDown(this)" onclick="paidDiffClick(this)">
           차액 지불 (40%)
         </label>
       </div>
@@ -2682,6 +2682,14 @@ const DISCOUNT_LABEL = {
   '50% 할인권':      '50% 할인권',
   '2만원 현장 예매': '2만원 현장 예매'
 };
+
+// 라디오 버튼은 네이티브로 재클릭 해제가 안 되므로, 이미 선택된 걸 다시 누르면 해제되게 처리
+function paidDiffMouseDown(el) {
+  el.dataset.wasChecked = el.checked ? '1' : '0';
+}
+function paidDiffClick(el) {
+  if (el.dataset.wasChecked === '1') el.checked = false;
+}
 
 function onDiscountTypeChange() {
   const val = document.getElementById('rec-discount-type').value;
