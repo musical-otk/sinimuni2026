@@ -1301,6 +1301,7 @@ function saveRecord() {
     const stampChanged = stampBoardId !== prevStampBoardId || stampQty !== prevStampQty
       || (prevStampBoardId && date !== prevRecord.date);
 
+    let overflowToastMsg = null;
     if (stampChanged) {
       const boards = getStampBoards();
 
@@ -1316,46 +1317,48 @@ function saveRecord() {
           revalidateMilestones(prevBoard);
         }
       }
+      saveStampBoards(boards);
 
-      // ② 새 도장판에 추가 — applyStampToBoard 활용 (마일스톤·할인권 처리 포함)
+      // ② 새 도장판에 추가 — applyStampToBoard 활용 (마일스톤·할인권 처리 + 오버플로우 시 새 도장판 자동 생성, 신규 기록 흐름과 동일)
       if (stampBoardId) {
-        const newBoard = boards.find(b => b.id === stampBoardId);
-        if (newBoard) {
-          // 같은 도장판이면 마일스톤 notified 리셋 후 재계산
-          if (prevStampBoardId === stampBoardId) revalidateMilestones(newBoard);
-          recalcStampCount(newBoard);
-
-          const remaining = newBoard.totalSlots - newBoard.currentCount;
-          // 꽉 찬 보드면 덮어쓰기 방지 (totalSlots 초과 불가)
-          const actualQty = remaining > 0 ? Math.min(stampQty, remaining) : 0;
-          if (actualQty > 0) {
-            const qtyLabel  = actualQty > 1 ? ' ×' + actualQty : '';
-            if (!newBoard.history) newBoard.history = [];
-            newBoard.history.push({
-              recordId: editId,
-              date,
-              method: `${eoduksini} · ${somun} 관람 연동` + qtyLabel,
-              comment: '',
-              qty: actualQty
-            });
-            recalcStampCount(newBoard);
-
-            if (!newBoard.milestones) newBoard.milestones = [
-              { at:3, reward:'40% 할인권', couponKey:'discount40', notified:false },
-              { at:4, reward:'50% 할인권', couponKey:'discount50', notified:false },
-              { at:7, reward:'실황 OST',  couponKey:null,          notified:false }
-            ];
-            newBoard.milestones.forEach(m => {
-              if (newBoard.currentCount >= m.at && !m.notified) {
-                m.notified = true;
-              }
-            });
+        const boardsChk = getStampBoards();
+        const boardChk  = boardsChk.find(b => b.id === stampBoardId);
+        if (boardChk) {
+          recalcStampCount(boardChk);
+          const remaining = boardChk.totalSlots - boardChk.currentCount;
+          let overflowNewBoardId = null;
+          let applyQty = stampQty;
+          if (stampQty > remaining) {
+            const overflow = stampQty - remaining;
+            if (confirm(`현재 도장판이 완료됩니다.\n새 도장판에 ${overflow}개를 추가합니다.\n계속하시겠습니까?`)) {
+              overflowNewBoardId = createNewStampBoard();
+            }
+            applyQty = remaining;
+          }
+          if (applyQty > 0) {
+            applyStampToBoard(stampBoardId, applyQty, date, `${eoduksini} · ${somun} 관람 연동`);
+            const boards2 = getStampBoards();
+            const board2  = boards2.find(b => b.id === stampBoardId);
+            if (board2 && board2.history && board2.history.length) {
+              board2.history[board2.history.length - 1].recordId = editId;
+              saveStampBoards(boards2);
+            }
+          }
+          if (overflowNewBoardId) {
+            const overflowQty = stampQty - applyQty;
+            applyStampToBoard(overflowNewBoardId, overflowQty, date, `${eoduksini} · ${somun} 관람 연동 (이월)`);
+            const boards3 = getStampBoards();
+            const board3  = boards3.find(b => b.id === overflowNewBoardId);
+            if (board3 && board3.history && board3.history.length) {
+              board3.history[board3.history.length - 1].recordId = editId;
+              saveStampBoards(boards3);
+            }
+            overflowToastMsg = `도장판 완성! 새 도장판에 ${overflowQty}개 추가됨`;
           }
         }
       }
-      saveStampBoards(boards);
     }
-    showToast('기록이 수정되었습니다');
+    showToast(overflowToastMsg || '기록이 수정되었습니다');
   } else {
     records.push(record);
     if (stampBoardId) {
