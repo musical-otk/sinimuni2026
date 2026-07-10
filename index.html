@@ -1401,15 +1401,19 @@ function saveRecord() {
     }
   }
   saveRecords(records);
-  // 더블/트리플 적립 사용 시 쿠폰 차감
-  if (usedDoubleStamp) {
+  // 더블/트리플 적립 사용 상태 변화 시에만 차감/원복 (이전 상태와 비교 — 무변경 재저장 시 중복차감 방지)
+  const prevUsedDouble = editId ? !!prevRecord?.usedDoubleStamp : false;
+  const prevUsedTriple = editId ? !!prevRecord?.usedTripleStamp : false;
+  if (usedDoubleStamp !== prevUsedDouble) {
     const coupons = getCoupons();
-    coupons.doubleStamp.history.push({ type:'사용', date, comment: '더블 적립 사용', qty: 1 });
+    if (usedDoubleStamp) coupons.doubleStamp.history.push({ type:'사용', date, comment: '더블 적립 사용', qty: 1 });
+    else                 coupons.doubleStamp.history.push({ type:'복원', date, comment: '더블 적립 해제로 복원', qty: 1 });
     saveCoupons(coupons);
   }
-  if (usedTripleStamp) {
+  if (usedTripleStamp !== prevUsedTriple) {
     const coupons = getCoupons();
-    coupons.tripleStamp.history.push({ type:'사용', date, comment: '트리플 적립 사용', qty: 1 });
+    if (usedTripleStamp) coupons.tripleStamp.history.push({ type:'사용', date, comment: '트리플 적립 사용', qty: 1 });
+    else                 coupons.tripleStamp.history.push({ type:'복원', date, comment: '트리플 적립 해제로 복원', qty: 1 });
     saveCoupons(coupons);
   }
   closePanel('overlay-record');
@@ -2924,7 +2928,7 @@ function renderCouponAllHistory() {
     (coupons[item.key].history || []).forEach((h, idx) => {
       if (h.type === '복원') return;
       if (h.comment && (h.comment.includes('달성 보상') || h.comment.includes('칸 달성'))) return;
-      if (h.type === '사용' && h.comment && (h.comment.includes('관람 사용') || h.comment.includes('적립 사용'))) return;
+      if (h.type === '사용' && h.comment && h.comment.includes('관람 사용')) return;
       allRows.push({ ...h, key: item.key, short: item.short, originalIdx: idx, rowType: 'manual' });
     });
   });
